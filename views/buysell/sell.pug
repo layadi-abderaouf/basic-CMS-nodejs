@@ -1,0 +1,45 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include bs_nav.pug
+      
+
+      div(class="row sb")
+         div(class="col-2 filter")
+            div( class="btn-group-vertical")
+               div(class=" btn  ")
+                   a(class="btn   btn-primary text-light" href="/buysell" ) all
+               for i in cat
+                     div(class=" btn  ")
+                           a(class="btn  btn-block btn-primary text-light" href="/buysell?cat="+i._id ) #{i.name}
+  
+
+        
+         div(class="col-10 ")
+            table( class="table")
+               thead
+                 tr
+                   th( scope="col" ) id
+                   th( scope="col" ) name
+                   th( scope="col" ) category
+                   th( scope="col" ) quantity
+                   th( scope="col" ) sell
+                 
+                 
+              
+               tbody
+                  for x in product
+                     form(method="POST")
+                         tr
+                            td
+                               input(type="text" value=x._id name="pro" class="form-control  " readonly)
+                            td 
+                                a(href=x._id) #{x.name}
+                            td #{x.category.name}
+                            td
+                               input(type="number" value="1" name="quantity" class="form-control ")
+                            td
+                               button(type="submit" class="btn btn-success  ") sell 
+              
+               

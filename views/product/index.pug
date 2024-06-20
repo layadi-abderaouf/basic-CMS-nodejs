@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include pro_nav.pug
+     
+      div(class="row")
+         div(class="col-2 ")
+            div( class="btn-group-vertical")
+               div(class=" btn  ")
+                   a(class="btn   btn-primary text-light" href="/" ) all
+               for i in cat
+                     div(class=" btn  ")
+                           a(class="btn  btn-block btn-primary text-light" href="/?cat="+i._id ) #{i.name}
+         div(class="col-10 ")
+            <table class="table">
+               <thead>
+                 <tr>
+                  
+                   <th scope="col">name</th>
+                   <th scope="col">price</th>
+                   <th scope="col">category</th>
+                   <th scope="col">quantity</th>
+                   <th scope="col">profit</th>
+
+                 </tr>
+               </thead>
+               <tbody>
+               for x in product
+                 <tr>
+                  
+                   td
+                     a(href=x._id) #{x.name}
+                   td #{x.price}
+                   td #{x.category.name}
+                   td #{x.quantity}
+                   td #{x.net_profit}
+                 </tr>
+                
+               </tbody>
+               </table>

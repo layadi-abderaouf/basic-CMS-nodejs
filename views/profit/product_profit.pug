@@ -1,0 +1,38 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include profit_nav.pug
+     
+      div(class="row")
+         div(class="col-2 ")
+             
+            div( class="btn-group-vertical")
+               div(class=" btn  ")
+                   a(class="btn   btn-primary text-light" href="/profit/product" ) all
+               for i in cat
+                     div(class=" btn  ")
+                           a(class="btn  btn-block btn-primary text-light" href="/profit/product?cat="+i._id ) #{i.name}
+            
+         div(class="col-10 ")
+            table( class="table")
+               thead
+                 tr
+                  
+                   th( scope="col") name
+                   th( scope="col") day profit
+                   th( scope="col") week profit
+                   th( scope="col") month profit
+                   th( scope="col") total profit
+
+                
+               
+               tbody
+               for x in product
+                 tr
+                  
+                   td #{x.name}
+                   td #{x.day_profit} DA
+                   td #{x.week_profit} DA
+                   td #{x.month_profit} DA
+                   td #{x.total_profit} DA       

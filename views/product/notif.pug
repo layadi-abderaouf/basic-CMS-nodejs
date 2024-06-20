@@ -1,0 +1,41 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include pro_nav.pug
+     
+      div(class="row")
+         div(class="col-3 bg-danger")
+         div(class="col-9 ")
+            <table class="table">
+               <thead>
+                 <tr>
+                  
+                   <th scope="col">name</th>
+                   <th scope="col">price</th>
+                   <th scope="col">quantity</th>
+                   <th scope="col">profit</th>
+                   <th scope="col">status</th>
+                 </tr>
+               </thead>
+               <tbody>
+               for x in pro1
+                 tr
+                   td
+                     a(href=x._id) #{x.name}
+                   td #{x.price}
+                   td #{x.quantity}
+                   td #{x.net_profit}
+                   td(class="text-warning")  small amount
+               for x in pro2
+                 tr
+                   td
+                     a(href=x._id) #{x.name}
+                   td #{x.price}
+                   td #{x.quantity}
+                   td #{x.net_profit}
+                   td(class="text-danger")  executed
+                 
+                
+               </tbody>
+               </table>   

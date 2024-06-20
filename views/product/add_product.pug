@@ -1,0 +1,26 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include pro_nav.pug
+      center
+         h2(class="mb-3") add new product
+      form(method="POST") 
+         label(class="form-label") product name
+         input(type="text" name="name" class="form-control")
+
+         label(class="form-label") price
+         input(type="number" name="price" class="form-control")
+
+         label(class="form-label") profit
+         input(type="number" name="profit" class="form-control")
+
+         label(class="form-label") quantity
+         input(type="number" name="quantity" class="form-control")
+
+         label(class="form-label") category
+         select( name="category" class="form-control col-6" id="cars")
+               for x in cat
+                  option( value=x._id) #{x.name}
+
+         button(type="submit" class="btn btn-success mt-4") add product

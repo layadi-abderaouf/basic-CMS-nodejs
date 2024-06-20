@@ -1,0 +1,30 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include profit_nav.pug
+      
+      div(class="row")
+         div(class="col-1")
+         div(class="col-11 ")
+            table( class="table")
+               thead
+                 tr
+                  
+                   th( scope="col" ) name
+                   th( scope="col" ) quantity
+                   th( scope="col" ) profit
+                   th( scope="col" ) type
+                   th( scope="col" ) date
+                 
+              
+               tbody
+              
+               for x in tran
+                 tr
+                   td
+                     a(href=x.product._id) #{x.product.name}
+                   td #{x.quantity}
+                   td #{x.profit}
+                   td #{x.type}
+                   td #{x.date}           

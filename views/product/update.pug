@@ -1,0 +1,28 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include pro_nav.pug
+      center
+         h2(class="mb-3") update product
+      form(method="POST") 
+         label(class="form-label") product name
+         input(type="text" value=product.name name="name" class="form-control")
+
+         label(class="form-label") price
+         input(type="number" value=product.price name="price" class="form-control")
+
+         label(class="form-label") profit
+         input(type="number" value=product.net_profit name="profit" class="form-control")
+
+         label(class="form-label") quantity
+         input(type="number" value=product.quantity name="quantity" class="form-control")
+
+         label(class="form-label") category
+         select( name="category" class="form-control col-6" id="cars")
+               for x in cat
+                  option( value=x._id) #{x.name}
+
+         button(type="submit"  class="btn btn-lg btn-success mt-4") update product
+      form(method="POST" action="/delete/"+product._id)
+         button(type="submit"  class="btn btn-lg btn-danger mt-4") delete product

@@ -1,0 +1,134 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include profit_nav.pug
+
+      div(class="row")
+         div(class="col-3")
+            <div class="card l-bg-green-dark">
+                      <div class="card-statistic-3 p-4">
+                          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                          <div class="mb-4">
+                              <h5 class="card-title mb-0">daily profit</h5>
+                          </div>
+                          <div class="row align-items-center mb-2 d-flex">
+                              <div class="col-12">
+                                  <h2 class="d-flex align-items-center mb-0"> #{pro.day} DA
+                                  </h2>
+                              </div>
+                             
+                          </div>
+                          <div class="progress mt-1 " data-height="12" style="height: 8px;">
+                              <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                          </div>
+                      </div>
+            </div>
+         div(class="col-3")
+            <div class="card l-bg-blue-dark">
+                      <div class="card-statistic-3 p-4">
+                          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                          <div class="mb-4">
+                              <h5 class="card-title mb-0">weekly profit</h5>
+                          </div>
+                          <div class="row align-items-center mb-2 d-flex">
+                              <div class="col-12">
+                                  <h2 class="d-flex align-items-center mb-0"> #{pro.week} DA
+                                  </h2>
+                              </div>
+                             
+                          </div>
+                          <div class="progress mt-1 " data-height="12" style="height: 8px;">
+                              <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                          </div>
+                      </div>
+            </div>
+         div(class="col-3")
+            <div class="card l-bg-orange-dark">
+                      <div class="card-statistic-3 p-4">
+                          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                          <div class="mb-4">
+                              <h5 class="card-title mb-0">monthly profit</h5>
+                          </div>
+                          <div class="row align-items-center mb-2 d-flex">
+                              <div class="col-12">
+                                  <h2 class="d-flex align-items-center mb-0"> #{pro.month} DA
+                                  </h2>
+                              </div>
+                              
+                          </div>
+                          <div class="progress mt-1 " data-height="12" style="height: 8px;">
+                              <div class="progress-bar l-bg-green" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                          </div>
+                      </div>
+            </div>
+         div(class="col-3")
+            <div class="card l-bg-green-dark">
+                      <div class="card-statistic-3 p-4">
+                          <div class="card-icon card-icon-large"><i class="fas fa-shopping-cart"></i></div>
+                          <div class="mb-4">
+                              <h5 class="card-title mb-0">total profit</h5>
+                          </div>
+                          <div class="row align-items-center mb-2 d-flex">
+                              <div class="col-12">
+                                  <h2 class="d-flex align-items-center mb-0"> #{pro.all} DA
+                                  </h2>
+                              </div>
+                             
+                          </div>
+                          <div class="progress mt-1 " data-height="12" style="height: 8px;">
+                              <div class="progress-bar l-bg-orange" role="progressbar" data-width="25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                          </div>
+                      </div>
+            </div>
+      hr
+      div(class="row")
+         form(method="POST" class="mt-5 col-6")
+            label(class="form-label") start a new period
+            input(class="form-control mb-2" type="text" name="name")
+            select( name="before" class="form-control mb-2" id="cars")
+               for x in profit
+                    option( value=x._id) #{x.name}
+            input(type="submit" class="btn btn-success" value="add period")
+
+         form(method="POST" action="/profit/add_cat" class="mt-5 col-6")
+            label(class="form-label") add new category
+            input(class="form-control mb-2" type="text" name="cat")
+            input(type="submit" class="btn btn-success" value="add category")
+      hr
+
+      table( class="table")
+               thead
+                 tr
+                  
+                   th( scope="col" ) /
+                   th( scope="col" ) profit
+                   th( scope="col" ) income
+                   th( scope="col" ) present before
+                   th( scope="col" ) status
+                   th( scope="col" ) before
+                   th( scope="col" ) update
+                   th( scope="col" ) the change
+
+                 
+              
+               tbody
+              
+               for x in profit
+                 tr
+                   td  #{x.name}
+                   td  #{x.profit } DA
+                   td  #{x.income}
+                   td #{x.before.name}
+                   form(method="post" action="/profit/update_period")
+                      td  
+                         input(type="number" name="status" value=x.status)
+                         input(type="hidden" value=x._id name="id")
+                      td  
+                         select( name="before" class="form-control mb-2" id="cars")
+                            for i in profit
+                                option( value=i._id ) #{i.name}
+                            
+                      td
+                         input(type="submit" value="update" class="btn btn-success")
+                   td  #{((x.profit - x.before.profit)/ x.before.profit) *100} % 

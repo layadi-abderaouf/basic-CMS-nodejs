@@ -1,0 +1,14 @@
+extends ../layout
+
+block content
+   div(class="container")
+      include bs_nav.pug
+      div(class="sb")
+         form(method="POST")
+            div(class="row mt-5 ml-5 mr-5")
+               select( name="pro" class="form-control col-6" id="cars")
+                 for x in product
+                    option( value=x._id) #{x.name}
+               
+               input(type="number" value="1" name="quantity" class="form-control col-4")
+               button(type="submit" class="btn btn-success  col-2") buy
